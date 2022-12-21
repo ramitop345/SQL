@@ -1,0 +1,26 @@
+SQL: Structured Query Language
+this is used for relational Data Bases
+it is made of rows and columns and
+every row has a unique id
+
+
+the ID can be every thing that is unique for each row in the Database
+it can be an Email, a Number, a SSN, or any other unique id to the items, it is called primary key
+
+A FOREING kEY is a primary key from one table used in another table to define a relation bwtween the two tables.
+this can be used to complete informations(columns) of a table in another table
+
+Forein Keys can also be used in the same table to define relationships between the items
+
+We also have COMPOSITE KEYS: these are tables with at least 2 (Primary)Keys. It works like a combination 
+
+
+
+SQL is a combinaion of 4 different types of languages:
+- DATA QUERY LANGUAGE(DQL): manipulate queries/entries 
+-DATA DEFINITION LANGUAGE(DDL): define entries
+-DATA CONTROL LANGUAGE(DCL): control Permissions and restrictions
+-DATA MANIPULATION LANGUAGE(DML): Insert und Update elements in Database
+
+
+the QUERY is a set of instructions given to the DBMS to retrieve specific data
