@@ -303,3 +303,72 @@ WHERE client.branch_id IN(
 
 DELETE FROM employee
 WHERE emp_id = 102
+
+
+
+------------------TRIGGERS AND IF ELSE STATEMENTS----------------------------
+--  a trigger is a set a code that is wriiten to perform  a certain action when an event happens
+
+
+CREATE TABLE trigger_test(
+    message VARCHAR(100)
+);
+
+DELIMITER $$
+CREATE 
+    TRIGGER my_trigger1 BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+        INSERT INTO trigger_test VALUES('added new employee');
+    END$$
+DELIMITER ;
+
+-- TESTING THE TRIGGER
+INSERT INTO employee VALUES(109, 'Oscar', 'Martinez', '1968-02-19', 'M', 69000, 106, 3);
+INSERT INTO employee VALUES(110, 'Leo', 'Martinez', '1968-05-19', 'M',89000, 105, 2);
+INSERT INTO employee VALUES(112, 'Sara', 'Johnson', '1970-05-01', 'F',100000, 104, 1);
+
+SELECT * FROM trigger_test;
+
+
+
+
+-- anotehr trigger
+DELIMITER $$
+CREATE 
+    TRIGGER my_trigger2 BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+        INSERT INTO trigger_test VALUES(NEW.first_name);
+    END$$
+DELIMITER ;
+
+--another TRIGGER
+DELIMITER $$
+CREATE 
+    TRIGGER my_trigger3 BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+        IF NEW.sex = 'M' THEN
+            INSERT INTO trigger_test VALUES('added Male employee');
+        ELSEIF NEW.sex = 'F' THEN
+            INSERT INTO trigger_test VALUES('added Female employee');
+        ELSE
+            INSERT INTO trigger_test VALUES('added other employee');
+        END IF;
+    END$$
+DELIMITER ;
+
+
+-- you can also create other TRIGGERS
+--TRIGGER my_trigger3 BEFORE DELETE
+--TRIGGER my_trigger3 BEFORE UPDATE
+--TRIGGER my_trigger3 BEFORE DROP
+--TRIGGER my_trigger3 AFTER INSERT
+--TRIGGER my_trigger3 AFTER DELETE
+--TRIGGER my_trigger3 AFTER UPDATE
+-- and even more
+
+
+--how to delete a Trigger
+DROP TRIGGER my_trigger2;
