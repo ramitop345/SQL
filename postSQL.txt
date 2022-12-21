@@ -263,3 +263,43 @@ SELECT employee.emp_id, employee.first_name, employee.last_name, branch.branch_n
 FROM employee
 RIGHT JOIN branch   --includes all of the rows from branch(right table)
 ON employee.emp_id = branch.mgr_id;
+
+
+
+
+-------------------------NESTED QUERIES---------------------------------
+-------------Nested Queries----------------------------
+SELECT * FROM employee;
+SELECT * FROM works_with;
+
+--find names of all employees who have sold over 30000 to a single cllent
+SELECT works_with.total_sales, works_with.emp_id, employee.first_name, employee.last_name
+FROM employee
+JOIN works_with
+ON total_sales > 30000;
+
+--the nested query
+SELECT employee.first_name, employee.last_name
+FROM employee
+WHERE employee.emp_id IN(
+    SELECT works_with.emp_id
+    FROM works_with
+    WHERE works_with.total_sales > 30000
+);
+
+--Find all cllients who are handled by the branch that michal scott manages
+SELECT client_name FROM client
+WHERE client.branch_id IN(
+    SELECT branch_id FROM branch
+    WHERE branch.mgr_id IN(
+        SELECT emp_id FROM employee
+        WHERE emp_id = 102
+    )
+);
+
+
+-- ON DELETE SET NULL means element will be set to NULL  if reference is deleted
+-- ON DELETE CASCADE meand element will be remove if reference is deleted
+
+DELETE FROM employee
+WHERE emp_id = 102
