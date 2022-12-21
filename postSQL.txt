@@ -372,3 +372,10 @@ DELIMITER ;
 
 --how to delete a Trigger
 DROP TRIGGER my_trigger2;
+
+
+
+
+------------------------------ER DIAGRAMMS-------------------------
+ER Diagrams are used to represent all requirements for a Database
+ into a Diagram. this is then later used to create a Schema for the Database
